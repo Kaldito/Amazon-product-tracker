@@ -14,6 +14,7 @@ HEADER_URL = "http://myhttpheader.com"
 CHAT_ID = config('CHAT_ID')
 TELEGRAM_BOT_TOKEN = config('TELEGRAM_BOT_TOKEN')
 TELEGRAM_API = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+# Visit this link to fill the headers correctly for you: http://myhttpheader.com
 HEADERS = {
     "User-Agent": "Defined",
     "Accept-Language": "es-419,es;q=0.9"
@@ -21,7 +22,12 @@ HEADERS = {
 
 
 # ---------------------------------------- FUNCTIONS ---------------------------------------- #
-def telegram_bot(text):
+def telegram_bot(text: str):
+    """
+    Sends a message using a telegram bot to a certain chat of your choice.
+
+    :param text: A string containing the message to be sent.
+    """
     parameters = {
         "chat_id": int(CHAT_ID),
         "text": text,
@@ -33,6 +39,11 @@ def telegram_bot(text):
 
 
 def amazon_tracker():
+    """
+    A function that web scrape the product price of an Amazon URL and compares it to another price that is stored in a
+    text file called lowest_price.txt. The function creates the text file if is the first time that is executed and
+    stores the first price that scrapes from the URL.
+    """
     response = requests.get(AMAZON_URL, headers=HEADERS)
     website = response.text
 
@@ -61,5 +72,14 @@ def amazon_tracker():
 
 
 # ---------------------------------------- SCRIPT ---------------------------------------- #
-amazon_tracker()
+print("""                                           _______             _             
+     /\                                    |__   __|           | |            
+    /  \   _ __ ___   __ _ _______  _ __      | |_ __ __ _  ___| | _____ _ __ 
+   / /\ \ | '_ ` _ \ / _` |_  / _ \| '_ \     | | '__/ _` |/ __| |/ / _ \ '__|
+  / ____ \| | | | | | (_| |/ / (_) | | | |    | | | | (_| | (__|   <  __/ |   
+ /_/    \_\_| |_| |_|\__,_/___\___/|_| |_|    |_|_|  \__,_|\___|_|\_\___|_|   
+ 
+""")
+
+# amazon_tracker()
 
